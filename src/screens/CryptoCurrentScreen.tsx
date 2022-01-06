@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, Text } from 'react-native';
-import { getAllCoins } from "../services/cryptoAPI"
+import { getAllCoins, getDetailsCoin } from "../services/cryptoAPI"
+import CoinsList from '../components/CoinsList';
 
 export default function CryptoCurrentScreen() 
 {
+    const [coins, setCoins] = useState([]);
+    //console.log("COINS: ", coins);
+
     useEffect(() => {
         console.log("call loadCoins");
         (async () => {
@@ -15,7 +19,25 @@ export default function CryptoCurrentScreen()
         try
         {
             const response = await getAllCoins();
-            console.log(response);
+            //console.log(response);
+
+            const coinsArray = [];
+            for await ( const coin of response.data ) 
+            {
+                console.log("COIN: ", coin.id);
+                //const coinDetails = await getDetailsCoin(coin.id);
+                //console.log("Details: ", coinDetails);
+                
+                coinsArray.push({
+                    id: coin.id,
+                    name: coin.name,
+                    nameid: coin.nameid,
+                    rank: coin.rank,
+                    symbol: coin.symbol,
+                });
+            
+            }
+            setCoins([...coins, ...coinsArray]);
         }
         catch(error)
         {
@@ -25,7 +47,7 @@ export default function CryptoCurrentScreen()
 
     return (
         <SafeAreaView>
-            <Text>Screen de listado de criptomonedas...</Text>
+            <CoinsList coins={coins} ></CoinsList>
         </SafeAreaView>
     )
 }

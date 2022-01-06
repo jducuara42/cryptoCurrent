@@ -15,7 +15,7 @@ export default function ListadoNavigation()
             <Stack.Screen 
                 name="CryptoCurrentScreen" 
                 component={CryptoCurrentScreen} 
-                options={{ title: "Listado de criptomonedas"}}></Stack.Screen>
+                options={{ title: "Listado de criptomonedas", headerTransparent:false}}></Stack.Screen>
             <Stack.Screen 
                 name="DetailsCryptoCurrentScreen" 
                 component={DetailsCryptoCurrentScreen} 
