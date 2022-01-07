@@ -47,7 +47,7 @@ export default function CryptoCurrentScreen()
 
     return (
         <SafeAreaView>
-            <CoinsList coins={coins} ></CoinsList>
+            <CoinsList coins={coins} loadCoins={ loadCoins }></CoinsList>
         </SafeAreaView>
     )
 }

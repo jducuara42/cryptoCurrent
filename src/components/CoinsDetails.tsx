@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image,  TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, Image,  TouchableWithoutFeedback, Platform } from 'react-native'
 import { ENDPOINT_IMAGE_COINS } from "../util/constants";
 
 export default function CoinsDetails(props) 
@@ -34,7 +34,7 @@ export default function CoinsDetails(props)
 const styles = StyleSheet.create({
     card: {
         flex: 1,
-        height: 80,
+        height: Platform.OS === "android" ? 90 : 85,
     },
     spacing: {
         flex: 1,
