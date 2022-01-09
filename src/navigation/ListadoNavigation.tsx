@@ -19,7 +19,7 @@ export default function ListadoNavigation()
             <Stack.Screen 
                 name="DetailsCryptoCurrentScreen" 
                 component={DetailsCryptoCurrentScreen} 
-                options={{ title: "Detalle de criptomoneda"}}></Stack.Screen>
+                options={{ title: "", headerTransparent:true}}></Stack.Screen>
         </Stack.Navigator>
     )
 }

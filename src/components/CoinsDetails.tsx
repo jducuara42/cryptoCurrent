@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image,  TouchableWithoutFeedback, Platform } from 'react-native'
 import { ENDPOINT_IMAGE_COINS } from "../util/constants";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CoinsDetails(props) 
 {
@@ -8,9 +9,11 @@ export default function CoinsDetails(props)
     const { coin } = props;
     let urlImageCoin: string = `${ENDPOINT_IMAGE_COINS}${coin.nameid}.png`;
     console.log("urlImageCoin::", urlImageCoin);
+    const navigation = useNavigation();
 
     const goToCoin = () => {
-        console.log("Dio tap a la moneda: ", coin.name);
+        console.log("Dio tap a la moneda: ", coin.id);
+        navigation.navigate("DetailsCryptoCurrentScreen", {id: coin.id});
     };
 
     return (
