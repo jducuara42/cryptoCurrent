@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, TextInput } from 'react-native';
 import { getAllCoins, getDetailsCoin } from "../services/cryptoAPI"
 import CoinsList from '../components/CoinsList';
 
@@ -47,7 +47,23 @@ export default function CryptoCurrentScreen()
 
     return (
         <SafeAreaView>
+            <TextInput
+                placeholder="Buscar"
+                style={styles.input}
+            />
             <CoinsList coins={coins} loadCoins={ loadCoins }></CoinsList>
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    input: 
+    {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+    },
+  });
+  

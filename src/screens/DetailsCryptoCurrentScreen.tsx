@@ -3,6 +3,8 @@ import { StyleSheet, SafeAreaView, Text, ScrollView, ActivityIndicator} from 're
 import { getDetailsCoin } from "../services/cryptoAPI"
 import Header from '../components/Coin/Header';
 import Statistics from '../components/Coin/Statistics';
+import ExchangeForm from '../components/Exchange/ExchangeForm';
+import Icon from "react-native-vector-icons/FontAwesome5"
 
 export default function DetailsCryptoCurrentScreen(props) 
 {
@@ -11,12 +13,13 @@ export default function DetailsCryptoCurrentScreen(props)
     //console.log(params.id)
 
     const [coin, setCoin] = useState(null);
-    /*useEffect(() => {
+    useEffect(() => {
         navigation.setOptions({
             headerRight: () => null,
             headerLeft: () => <Icon name="arrow-left" color={"#fff"} size={20} style={{ marginLeft:20}} onPress={navigation.goBack}></Icon>
         })
-    }, [navigation, params]);*/
+    }, [navigation, params]);
+
     useEffect(() => {
         (async () => {
             try 
@@ -51,6 +54,10 @@ export default function DetailsCryptoCurrentScreen(props)
                 percent_change_24h={coin[0].percent_change_24h}
                 percent_change_7d={coin[0].percent_change_7d}
                 price_btc={coin[0].price_btc}></Statistics>
+            <ExchangeForm
+                symbol={coin[0].symbol}
+                price_usd={coin[0].price_usd} 
+            ></ExchangeForm>
         </ScrollView>
     )
 }

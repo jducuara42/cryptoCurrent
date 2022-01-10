@@ -22,7 +22,7 @@ export default function Statistics(props)
 
     return (
         <View style={styles.content}>
-            <Text style={styles.title}>Estadisticas Base:</Text>
+            <Text style={styles.title}>Estadisticas Base</Text>
             
                 <View style={styles.block}>
                     <View style={styles.blockTitle}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     {
         paddingHorizontal: 20,
         marginTop: 40,
-        marginBottom: 100,
+        marginBottom: 30,
     },
     block:
     {
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     },
     blockTitle:
     {
-        width:"50%",
-
+        width:"60%",
     },
     title:
     {
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 25,
         paddingBottom: 5,
+        textAlign: "center",
     },
     statName:
     {
