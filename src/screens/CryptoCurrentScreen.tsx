@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, Text, TextInput } from 'react-native';
 import { getAllCoins, getDetailsCoin } from "../services/cryptoAPI"
 import CoinsList from '../components/CoinsList';
+//import {CoinsList} from "../components/CoinsList";
 
 export default function CryptoCurrentScreen() 
 {
@@ -47,10 +48,6 @@ export default function CryptoCurrentScreen()
 
     return (
         <SafeAreaView>
-            <TextInput
-                placeholder="Buscar"
-                style={styles.input}
-            />
             <CoinsList coins={coins} loadCoins={ loadCoins }></CoinsList>
         </SafeAreaView>
     )

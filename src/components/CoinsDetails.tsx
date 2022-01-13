@@ -1,14 +1,14 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image,  TouchableWithoutFeedback, Platform } from 'react-native'
+import { StyleSheet, View, Text, Image, TextInput, TouchableWithoutFeedback, Platform } from 'react-native'
 import { ENDPOINT_IMAGE_COINS } from "../util/constants";
 import { useNavigation } from "@react-navigation/native";
 
 export default function CoinsDetails(props) 
 {
-    console.log("props::", props);
+    //console.log("props::", props);
     const { coin } = props;
     let urlImageCoin: string = `${ENDPOINT_IMAGE_COINS}${coin.nameid}.png`;
-    console.log("urlImageCoin::", urlImageCoin);
+    //console.log("urlImageCoin::", urlImageCoin);
     const navigation = useNavigation();
 
     const goToCoin = () => {

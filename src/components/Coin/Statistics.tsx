@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native'
 
 export default function Statistics(props) 
 {
-    console.log("Props-S", props);
+    //console.log("Props-S", props);
     const {price_usd, percent_change_1h, percent_change_24h, percent_change_7d, price_btc} = props;
     
     const numberStyles = (valor) => {

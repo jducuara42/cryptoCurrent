@@ -5,7 +5,7 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Header(props) 
 {
-    console.log("PROPS: ", props);
+    //console.log("PROPS: ", props);
     const {name, nameid, symbol, rank} = props;
     let urlImageCoin: string = `${ENDPOINT_IMAGE_COINS}${nameid}.png`;
     const bgStyles = [{ backgroundColor: "grey", ...styles.background }]
