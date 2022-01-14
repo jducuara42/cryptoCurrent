@@ -7,6 +7,8 @@ import CoinsList from '../components/CoinsList';
 export default function CryptoCurrentScreen() 
 {
     const [coins, setCoins] = useState([]);
+    const [coinsFull, setCoinsFull] = useState([]);
+    const [validateLoad, setValidateLoad] = useState();
     //console.log("COINS: ", coins);
 
     useEffect(() => {
@@ -25,7 +27,7 @@ export default function CryptoCurrentScreen()
             const coinsArray = [];
             for await ( const coin of response.data ) 
             {
-                console.log("COIN: ", coin.id);
+                console.log("COIN: ", coin.name);
                 //const coinDetails = await getDetailsCoin(coin.id);
                 //console.log("Details: ", coinDetails);
                 
@@ -38,7 +40,37 @@ export default function CryptoCurrentScreen()
                 });
             
             }
+            
+            setValidateLoad(true);
             setCoins([...coins, ...coinsArray]);
+            setCoinsFull([...coinsFull, ...coinsArray]);
+            console.log("-------COINS: ", ...coins);
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+    };
+
+    const loadCoinsFilter = async (data) => {
+        console.log("=== DATA: ", data);
+        try
+        {
+            if(data)
+            {
+                
+            }
+            if(data == "*")
+            {
+                console.log("cargar todo...", coinsFull);
+                setValidateLoad(true);
+                setCoins(coinsFull);
+            }
+            else
+            {
+                setValidateLoad(false);
+                setCoins(data);
+            }
         }
         catch(error)
         {
@@ -48,7 +80,11 @@ export default function CryptoCurrentScreen()
 
     return (
         <SafeAreaView>
-            <CoinsList coins={coins} loadCoins={ loadCoins }></CoinsList>
+            <CoinsList 
+                coins={coins} 
+                loadCoins={ loadCoins } 
+                loadCoinsFilter={ loadCoinsFilter } 
+                validateLoad={ validateLoad }></CoinsList>
         </SafeAreaView>
     )
 }
