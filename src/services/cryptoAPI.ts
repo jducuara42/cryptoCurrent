@@ -1,4 +1,5 @@
-import { ENDPOINT_CRYPTO_API, START_COINS, LIMIT_COINS } from "../util/constants"
+//Importe constante endpoint del API y de las imagenes
+import { ENDPOINT_CRYPTO_API, LIMIT_COINS } from "../util/constants";
 
 let contador: number = 0;
 
@@ -40,6 +41,7 @@ export async function getDetailsCoin(id:string)
         console.log(url); 
         const response = await fetch(url);
         //const result = await response.json();
+        
         if (response.ok) 
         {
             const result = await response.json();

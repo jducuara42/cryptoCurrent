@@ -1,12 +1,14 @@
-import React, { useState, useEffect }  from 'react'
-import { StyleSheet, SafeAreaView, Text, ScrollView, ActivityIndicator} from 'react-native'
-import { getDetailsCoin } from "../services/cryptoAPI"
+import React, { useState, useEffect }  from 'react';
+import { ScrollView} from 'react-native';
+import Icon from "react-native-vector-icons/FontAwesome5";
+
+//importe de componentes propios, consumo de APIs y componentes pantalla de detalles.
+import { getDetailsCoin } from "../services/cryptoAPI";
 import Header from '../components/Coin/Header';
 import Statistics from '../components/Coin/Statistics';
 import ExchangeForm from '../components/Exchange/ExchangeForm';
-import Icon from "react-native-vector-icons/FontAwesome5"
 
-export default function DetailsCryptoCurrentScreen(props) 
+export default function DetailsCryptoCurrentScreen(props: { navigation: any; route: { params: any; }; }) 
 {
     //console.log(props);
     const {navigation, route: {params} } = props;

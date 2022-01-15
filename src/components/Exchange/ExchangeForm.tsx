@@ -1,7 +1,9 @@
-import React from 'react'
-import { StyleSheet, View, Text, TextInput, Button, Keyboard } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text, TextInput} from 'react-native';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+//
 import {exchange} from "../../util/exchange";
 
 export default function ExchangeForm(props) 

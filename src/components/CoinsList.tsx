@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TextInput, ActivityIndicator, Platform } from 'react-native'
-import CoinsDetails from './CoinsDetails';
-import { ListItem, SearchBar } from "react-native-elements";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { View, FlatList, TextInput, ActivityIndicator } from 'react-native';
 import filter from 'lodash.filter';
 
-export default function CoinsList(props) 
+//importe de componentes propios, componente detalle de monedas y estilos
+import CoinsDetails from './CoinsDetails';
+import { styles } from './styles';
+
+export default function CoinsList(props: { coins: any; loadCoins: any; loadCoinsFilter: any; validateLoad: any; }) 
 {
     //console.log("props", props);
     const [Data, setData] = useState([]);
 
     const { coins, loadCoins, loadCoinsFilter, validateLoad } = props;
 
-    const handleSearch = (valor) => {
+    const handleSearch = (valor: string) => {
         let coinsFull;
         if(valor == "")
         {
@@ -39,7 +39,7 @@ export default function CoinsList(props)
         }
     }; 
 
-    const contains = ({ name, nameid, symbol }, query) => {
+    const contains = ({ name, nameid, symbol }: any, query: string) => {
         //const { first, last } = name;
         
         //console.log("CONTAINS-name: ", name);
@@ -58,7 +58,7 @@ export default function CoinsList(props)
         loadCoins();
     };
 
-    const renderHeader = (props) => {
+    const renderHeader = (props: any) => {
         //console.log("props-renderHeader: ", props);
         return (
             <View
@@ -108,7 +108,6 @@ export default function CoinsList(props)
                     autoCapitalize="none"
                     autoCorrect={false}
                     clearButtonMode="always"
-                    //value={query}
                     onChangeText={queryText => handleSearch(queryText)}
                     placeholder="Search"
                     style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
@@ -124,25 +123,7 @@ export default function CoinsList(props)
                 onEndReached={validateLoad && loadMore}
                 onEndReachedThreshold={0.1}
                 ListFooterComponent={validateLoad && renderFooterLoader}     
-                ></FlatList>
+            ></FlatList>
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    FlatListContentContainer:{
-        paddingHorizontal:5,
-        marginTop: Platform.OS === "android" ? 30 : 0,
-    },
-    spinner:{
-        marginTop: 20,
-        marginBottom: Platform.OS === "android" ? 90 : 80,
-    },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 10,
-    },
-});

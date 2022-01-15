@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { View, Text } from 'react-native'
+
+//Importe de componentes propios, pantallas de listado y detalle de moneda
 import CryptoCurrentScreen from '../screens/CryptoCurrentScreen';
 import DetailsCryptoCurrentScreen from '../screens/DetailsCryptoCurrentScreen';
-
-import { StackActions } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 

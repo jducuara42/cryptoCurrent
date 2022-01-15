@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Text, TextInput } from 'react-native';
-import { getAllCoins, getDetailsCoin } from "../services/cryptoAPI"
+import { SafeAreaView } from 'react-native';
+
+//importe de componentes propios, consumo de APIs y componente pantalla de listado.
+import { getAllCoins } from "../services/cryptoAPI";
 import CoinsList from '../components/CoinsList';
-//import {CoinsList} from "../components/CoinsList";
 
 export default function CryptoCurrentScreen() 
 {
@@ -56,10 +57,7 @@ export default function CryptoCurrentScreen()
         console.log("=== DATA: ", data);
         try
         {
-            if(data)
-            {
-                
-            }
+            if(data){}
             if(data == "*")
             {
                 console.log("cargar todo...", coinsFull);
@@ -88,15 +86,3 @@ export default function CryptoCurrentScreen()
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    input: 
-    {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 10,
-    },
-  });
-  
