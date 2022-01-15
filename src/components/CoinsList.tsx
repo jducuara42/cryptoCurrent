@@ -6,10 +6,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import filter from 'lodash.filter';
 
-
 export default function CoinsList(props) 
 {
-    console.log("props", props.validateLoad);
+    //console.log("props", props);
     const [Data, setData] = useState([]);
 
     const { coins, loadCoins, loadCoinsFilter, validateLoad } = props;
@@ -25,7 +24,6 @@ export default function CoinsList(props)
         {
             coinsFull = coins;
             console.log("VALOR De: ", valor);
-            formik.setFieldValue("search", valor);
             const formattedQuery = valor.toLowerCase();
             //console.log("COINS: ", coins);
 
@@ -34,6 +32,9 @@ export default function CoinsList(props)
             });
 
             console.log("filteredData: ", filteredData);
+            //coins = filteredData;
+            //setCoinsFilter(filteredData);
+            //setQuery(text);
             loadCoinsFilter(filteredData);
         }
     }; 
@@ -53,26 +54,12 @@ export default function CoinsList(props)
       };
 
     const loadMore= () =>{
-        /*if(validateLoadMore)
-        {
-            console.log("--Cargar mas monedas...");
-            loadCoins();
-        }
-        else
-        {
-            console.log("NO cargar mas monedas...");
-        }*/
-        console.log("loadMore: ", validateLoad);
-        loadCoins();
-    };
-
-    const loadFilter= () =>{
         console.log("Cargar mas monedas...");
         loadCoins();
     };
 
     const renderHeader = (props) => {
-        console.log("props-renderHeader: ", props);
+        //console.log("props-renderHeader: ", props);
         return (
             <View
                 style={{
@@ -85,33 +72,16 @@ export default function CoinsList(props)
                     autoCapitalize="none"
                     autoCorrect={false}
                     clearButtonMode="always"
-                    value={formik.values.search}
+                    //value={query}
                     onChangeText={queryText => handleSearch(queryText)}
                     placeholder="Search"
                     style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
-                    enablesReturnKeyAutomatically
                 />
             </View>
         );
     };
 
     const renderFooterLoader = () => {
-        /*if(validateLoadMore)
-        {
-            console.log("Cargar loader...");
-            return(
-                <ActivityIndicator
-                    size="large"
-                    style={styles.spinner}
-                    color="blue"
-                ></ActivityIndicator>
-            );
-        }
-        else
-        {
-            console.log("NO mostrar loader...");
-            return(null);
-        }*/
         console.log("renderFooterLoader: ", validateLoad);
         return(
             <ActivityIndicator
@@ -122,15 +92,28 @@ export default function CoinsList(props)
         );
     };
 
-    const formik = useFormik({
-        initialValues: initialValues(),
-        onSubmit: (formValue) => {
-            console.log("Formulario enviado");
-        },
-      });
+    //console.log("coinsFull: ", coinsFull);
+    //console.log("coins: ", coins);
 
     return (
         <>
+            <View
+                style={{
+                backgroundColor: '#fff',
+                padding: 10,
+                marginVertical: 10,
+                borderRadius: 20
+                }}>
+                <TextInput
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    clearButtonMode="always"
+                    //value={query}
+                    onChangeText={queryText => handleSearch(queryText)}
+                    placeholder="Search"
+                    style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                />
+            </View>
             <FlatList
                 data={coins}
                 numColumns={1}
@@ -139,20 +122,12 @@ export default function CoinsList(props)
                 renderItem={({item}) => <CoinsDetails coin={item}></CoinsDetails>}
                 contentContainerStyle={styles.FlatListContentContainer}
                 onEndReached={validateLoad && loadMore}
-                onEndReachedThreshold={0.8}
-                ListHeaderComponent={renderHeader}
-                extraData={loadFilter}
-                ListFooterComponent={validateLoad && renderFooterLoader}            
-            ></FlatList>
+                onEndReachedThreshold={0.1}
+                ListFooterComponent={validateLoad && renderFooterLoader}     
+                ></FlatList>
         </>
     )
 }
-
-function initialValues() {
-    return {
-      search: "",
-    };
-  }
 
 const styles = StyleSheet.create({
     FlatListContentContainer:{
