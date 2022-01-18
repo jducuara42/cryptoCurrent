@@ -43,7 +43,7 @@ export default function CryptoCurrentScreen()
         }
         catch(error)
         {
-            console.error(error);
+            throw(error);
         }
     };
 

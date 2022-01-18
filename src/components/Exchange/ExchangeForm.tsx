@@ -8,20 +8,16 @@ import {exchange} from "../../util/exchange";
 
 export default function ExchangeForm(props) 
 {
-    //console.log("PROPS: ", props);
     const {symbol, price_usd} = props;
-    //console.log("price_usd: ", price_usd);
     let de:string = "De " + symbol;
 
     const exchangeToUSD = (valor:number) => {
         try 
         {
-            console.log("VALOR A: ", valor);
             formik.setFieldValue("coinOf", valor);
     
             let exchangeObj = new exchange();
             exchangeObj.getExchangeUSD(price_usd, valor);
-            console.log("Cambio: ", exchangeObj.getValor());
             formik.setFieldValue("coinTo", exchangeObj.getValor().toString());
         }
         catch (error)
@@ -33,11 +29,9 @@ export default function ExchangeForm(props)
     const exchangeOfUSD = (valor:number) => {
         try 
         {
-            console.log("VALOR De: ", valor);
             formik.setFieldValue("coinTo", valor);
             let exchangeObj = new exchange();
             exchangeObj.getExchangeTo(price_usd, valor);
-            console.log("Cambio: ", exchangeObj.getValor());
             formik.setFieldValue("coinOf", exchangeObj.getValor().toString());
         } 
         catch (error) 
@@ -50,7 +44,7 @@ export default function ExchangeForm(props)
         initialValues: initialValues(),
         validationSchema: Yup.object(validationData()),
         onSubmit: (formValue) => {
-            console.log("Formulario enviado");
+            
         },
       });
 
