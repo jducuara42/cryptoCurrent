@@ -3,19 +3,21 @@ import { StyleSheet, View, Text, TextInput} from 'react-native';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-//
+//importe de componente propio clase con logica de conversion y estilos
 import {exchange} from "../../util/exchange";
+import { styles } from './styles';
 
+//funcion para manejo de formulario de conversion.
 export default function ExchangeForm(props) 
 {
     const {symbol, price_usd} = props;
     let de:string = "De " + symbol;
 
+    //Funcion conversion a dolares
     const exchangeToUSD = (valor:number) => {
         try 
         {
             formik.setFieldValue("coinOf", valor);
-    
             let exchangeObj = new exchange();
             exchangeObj.getExchangeUSD(price_usd, valor);
             formik.setFieldValue("coinTo", exchangeObj.getValor().toString());
@@ -26,6 +28,7 @@ export default function ExchangeForm(props)
         }
     }
 
+    //Funcion conversion a otras monedas
     const exchangeOfUSD = (valor:number) => {
         try 
         {
@@ -73,6 +76,7 @@ export default function ExchangeForm(props)
     )
 }
 
+//Validacion de tipo de datos
 function validationData() {
     return {
         coinOf: Yup.number().required("Solo se aceptan numeros en el campo DE"),
@@ -87,6 +91,7 @@ function initialValues() {
     };
   }
 
+  /*
 const styles = StyleSheet.create({
     title: {
       textAlign: "center",
@@ -113,4 +118,4 @@ const styles = StyleSheet.create({
       marginTop: 20,
     },
   });
-  
+  */
