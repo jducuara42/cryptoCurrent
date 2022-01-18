@@ -5,9 +5,9 @@ import { StyleSheet, View, Text } from 'react-native';
 //importe de componente propio, constante de estilos
 import { stylesStats } from './styles';
 
+//Funcion para construccion del componente de los stats del detalle de la moneda.
 export default function Statistics(props: { price_usd: string; percent_change_1h: string; percent_change_24h: string; percent_change_7d: string; price_btc: string; }) 
 {
-    //console.log("Props-S", props);
     const {price_usd, percent_change_1h, percent_change_24h, percent_change_7d, price_btc} = props;
     
     const numberStyles = (valor: string | number) => {
@@ -17,6 +17,7 @@ export default function Statistics(props: { price_usd: string; percent_change_1h
         };
     };
     
+    //Funcion mostrar flecha segun valor
     const textValue = (valor: string | number) => {
         const flecha = valor > 0 ? " ↑" : " ↓";
         const text = valor + flecha;

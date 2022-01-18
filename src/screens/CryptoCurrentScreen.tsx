@@ -5,33 +5,28 @@ import { SafeAreaView } from 'react-native';
 import { getAllCoins } from "../services/cryptoAPI";
 import CoinsList from '../components/CoinsList';
 
+//Funcion para la construccion de la pantalla de las monedas
 export default function CryptoCurrentScreen() 
 {
     const [coins, setCoins] = useState([]);
     const [coinsFull, setCoinsFull] = useState([]);
     const [validateLoad, setValidateLoad] = useState();
-    //console.log("COINS: ", coins);
 
     useEffect(() => {
-        console.log("call loadCoins");
         (async () => {
             await loadCoins();
         })()
     }, []);
 
+    //Funcion para consumir el API de monedas
     const loadCoins = async () => {
         try
         {
             const response = await getAllCoins();
-            //console.log(response);
-
             const coinsArray = [];
+
             for await ( const coin of response.data ) 
-            {
-                console.log("COIN: ", coin.name);
-                //const coinDetails = await getDetailsCoin(coin.id);
-                //console.log("Details: ", coinDetails);
-                
+            {   
                 coinsArray.push({
                     id: coin.id,
                     name: coin.name,
@@ -45,7 +40,6 @@ export default function CryptoCurrentScreen()
             setValidateLoad(true);
             setCoins([...coins, ...coinsArray]);
             setCoinsFull([...coinsFull, ...coinsArray]);
-            console.log("-------COINS: ", ...coins);
         }
         catch(error)
         {
@@ -53,14 +47,13 @@ export default function CryptoCurrentScreen()
         }
     };
 
+    //Funcion para cargar las monedas filtradas
     const loadCoinsFilter = async (data) => {
-        console.log("=== DATA: ", data);
         try
         {
             if(data){}
             if(data == "*")
             {
-                console.log("cargar todo...", coinsFull);
                 setValidateLoad(true);
                 setCoins(coinsFull);
             }
@@ -72,7 +65,7 @@ export default function CryptoCurrentScreen()
         }
         catch(error)
         {
-            console.error(error);
+            throw(error);
         }
     };
 

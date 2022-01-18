@@ -6,44 +6,33 @@ import filter from 'lodash.filter';
 import CoinsDetails from './CoinsDetails';
 import { styles } from './styles';
 
+//Funcion para construir el listado de monedas
 export default function CoinsList(props: { coins: any; loadCoins: any; loadCoinsFilter: any; validateLoad: any; }) 
 {
-    //console.log("props", props);
     const [Data, setData] = useState([]);
-
     const { coins, loadCoins, loadCoinsFilter, validateLoad } = props;
 
+    //Funcion de buscado de monedas
     const handleSearch = (valor: string) => {
         let coinsFull;
         if(valor == "")
         {
-            console.log("Cargar todas...", coinsFull);
             loadCoinsFilter("*");
         }
         else
         {
             coinsFull = coins;
-            console.log("VALOR De: ", valor);
             const formattedQuery = valor.toLowerCase();
-            //console.log("COINS: ", coins);
 
             const filteredData = filter(coins, coin => {
                 return contains(coin, formattedQuery);
             });
-
-            console.log("filteredData: ", filteredData);
-            //coins = filteredData;
-            //setCoinsFilter(filteredData);
-            //setQuery(text);
             loadCoinsFilter(filteredData);
         }
     }; 
 
+    //Funcion para la busqueda en los diferentes campos
     const contains = ({ name, nameid, symbol }: any, query: string) => {
-        //const { first, last } = name;
-        
-        //console.log("CONTAINS-name: ", name);
-        //console.log("CONTAINS-nameid: ", nameid);
 
         if (name.includes(query) || nameid.includes(query) || symbol.includes(query)) 
         {
@@ -54,12 +43,11 @@ export default function CoinsList(props: { coins: any; loadCoins: any; loadCoins
       };
 
     const loadMore= () =>{
-        console.log("Cargar mas monedas...");
         loadCoins();
     };
 
+    //Funcion para construir la cabecera de la lista
     const renderHeader = (props: any) => {
-        //console.log("props-renderHeader: ", props);
         return (
             <View
                 style={{
@@ -81,8 +69,8 @@ export default function CoinsList(props: { coins: any; loadCoins: any; loadCoins
         );
     };
 
+    //Funcion para construir el footer de la lista
     const renderFooterLoader = () => {
-        console.log("renderFooterLoader: ", validateLoad);
         return(
             <ActivityIndicator
                 size="large"
@@ -91,9 +79,6 @@ export default function CoinsList(props: { coins: any; loadCoins: any; loadCoins
             ></ActivityIndicator>
         );
     };
-
-    //console.log("coinsFull: ", coinsFull);
-    //console.log("coins: ", coins);
 
     return (
         <>
@@ -111,6 +96,7 @@ export default function CoinsList(props: { coins: any; loadCoins: any; loadCoins
                     onChangeText={queryText => handleSearch(queryText)}
                     placeholder="Search"
                     style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+                    testID="txtSearchCoin"
                 />
             </View>
             <FlatList
@@ -122,7 +108,8 @@ export default function CoinsList(props: { coins: any; loadCoins: any; loadCoins
                 contentContainerStyle={styles.FlatListContentContainer}
                 onEndReached={validateLoad && loadMore}
                 onEndReachedThreshold={0.1}
-                ListFooterComponent={validateLoad && renderFooterLoader}     
+                ListFooterComponent={validateLoad && renderFooterLoader}
+                testID="flatListCoins"     
             ></FlatList>
         </>
     )

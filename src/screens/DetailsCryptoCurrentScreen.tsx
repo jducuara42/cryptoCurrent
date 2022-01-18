@@ -10,11 +10,9 @@ import ExchangeForm from '../components/Exchange/ExchangeForm';
 
 export default function DetailsCryptoCurrentScreen(props: { navigation: any; route: { params: any; }; }) 
 {
-    //console.log(props);
     const {navigation, route: {params} } = props;
-    //console.log(params.id)
-
     const [coin, setCoin] = useState(null);
+
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => null,
@@ -26,11 +24,8 @@ export default function DetailsCryptoCurrentScreen(props: { navigation: any; rou
         (async () => {
             try 
             {
-                console.log("ID: ", params.id );
                 const response = await getDetailsCoin(params.id);
                 setCoin(response);
-                //console.log("coin: ", coin);
-                console.log("RESPONSE: ", response);
             } 
             catch (error) 
             {

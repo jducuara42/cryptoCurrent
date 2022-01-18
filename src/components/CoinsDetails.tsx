@@ -6,16 +6,15 @@ import { useNavigation } from "@react-navigation/native";
 import { ENDPOINT_IMAGE_COINS } from "../util/constants";
 import { stylesDetails } from './styles';
 
+//Funcion para mostrar las monedas
 export default function CoinsDetails(props: { coin: any; }) 
 {
-    //console.log("props::", props);
     const { coin } = props;
     let urlImageCoin: string = `${ENDPOINT_IMAGE_COINS}${coin.nameid}.png`;
-    //console.log("urlImageCoin::", urlImageCoin);
     const navigation = useNavigation();
 
+    //Funcion para ir a la moneda seleccionada
     const goToCoin = () => {
-        console.log("Dio tap a la moneda: ", coin.id);
         navigation.navigate("DetailsCryptoCurrentScreen", {id: coin.id});
     };
 

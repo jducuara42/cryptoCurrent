@@ -1,6 +1,8 @@
+//Clase para las operaciones de conversion entre monedas
 export class exchange 
 {
     public valor: number;
+
     constructor() 
     {
         this.valor = 0;

@@ -5,9 +5,9 @@ import { View, SafeAreaView, Text, Image } from 'react-native';
 import { ENDPOINT_IMAGE_COINS } from "../../util/constants";
 import { styles } from './styles'; 
 
+//Funcion para construccion de componente header del detalle de la moneda.
 export default function Header(props: { name:string; nameid:string; symbol:string; rank:string; }) 
 {
-    //console.log("PROPS: ", props);
     const {name, nameid, symbol, rank} = props;
     let urlImageCoin: string = `${ENDPOINT_IMAGE_COINS}${nameid}.png`;
 
